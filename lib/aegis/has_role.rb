@@ -23,8 +23,9 @@ module Aegis
       send :define_method, :role= do |role|
         send(set_role_name, role.name)
       end
-
-      self.send :define_method, :validates_role do |*validate_options|
+      
+      metaclass ||= singleton_class
+      metaclass.send :define_method, :validates_role do |*validate_options|
         validate_options = validate_options[0] || {}
 
         send :define_method, :validate_role do
